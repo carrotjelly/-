@@ -10,9 +10,14 @@ public class Application {
               playGame();
               System.out.print("게임을 다시 시작하시겠습니까? (1: 재시작, 2: 종료): ");
               int choice = Integer.parseInt(Console.readLine());
-              if (choice == 2) {
-                  System.out.println("게임을 종료합니다.");
-                  break;
+              if (choice == 1) {
+                  System.out.println("게임을 재시작합니다.");
+                  continue;
+              }else if (choice == 2) {
+            	  System.out.println("게임을 종료합니다.");
+            	  break;
+              }else {
+            	  throw new IllegalArgumentException("잘못된 입력입니다.");
               }
           }
       }
@@ -54,21 +59,24 @@ public class Application {
 
           System.out.println("게임 종료! 시도 횟수: " + attempts);
       }
-      // 숫자 생성
-      private static int[] RandomNumbers(int min, int max, int count) {
-          int[] numbers = new int[count];
-          for (int i = 0; i < count; i++) {
+      // 숫자 생성 및 게임횟수
+      private static int[] RandomNumbers(int min, int max, int ThreeNum) {
+          int[] numbers = new int[ThreeNum];
+          for (int i = 0; i < ThreeNum; i++) {
               int num;
               do {
                   num = Randoms.pickNumberInRange(min, max);
               } while (contains(numbers, num));
               numbers[i] = num;
+              
           }
           return numbers;
       }
       // 컴퓨터의 숫자 중복 확인
       private static boolean contains(int[] array, int value) {
           for (int num : array) {
+        	  System.out.println(num);
+        	  //System.out.println(value);
               if (num == value) {
                   return true;
               }
